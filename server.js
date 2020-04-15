@@ -28,13 +28,30 @@ app.get('/', function(req, res){
 });
 
 //addReservation route
-app.get('/reserve', function(req, res){
+app.get('/reservationform', function(req, res){
     res.sendFile(path.join(__dirname, "reservationform.html"));
 })
 
+
+
 //API routes
+//====================================================================
+
+//viewReservation route
+app.get('/api/reservation', function(req, res){
+    return res.json(reservations);
+});
+
 
 //API Posts
+app.post("/api/reservation", function(req, res){
+    var reservation = req.body;
+
+    console.log(reservation);
+    reservations.push(reservation);
+
+    res.send("Thank you, you are now reserved");
+})
 
 /* #  Main code
 =============================================*/
