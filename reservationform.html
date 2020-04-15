@@ -66,7 +66,7 @@
         phone: $("#phone-number").val().trim(),
       };
 
-      $.post("/api/reservations", newReservation)
+      $.post("/api/reservation", newReservation)
         .then(function(data) {
           console.log("reservationform.html", data);
           alert("Submitting reservation request...");
