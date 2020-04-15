@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation Form</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Reservation Form</h1>
+      <h3>Create your reservation below</h3>
+      <hr>
+      <a href="/"><button class="btn btn-danger btn-lg">Home</button></a>
+    </div>
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="card">
+          <div class="card-header">
+            <h3><strong>Reservation Info</strong></h3>
+          </div>
+          <div class="card-body">
+            <form method="POST" role="form">
+
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+
+              <div class="form-group">
+                <label for="role">Party Size</label>
+                <input type="number" class="form-control" id="party-size">
+              </div>
+
+              <div class="form-group">
+                <label for="age">Phone Number</label>
+                <input type="tel" class="form-control" placeholder="555-555-5555" id="phone-number">
+              </div>
+
+
+            </form>
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="submit-btn">Submit</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $("#submit-btn").on("click", function(event) {
+      event.preventDefault();
+      var newReservation = {
+        name: $("#name").val().trim(),
+        party: $("#party-size").val().trim(),
+        phone: $("#phone-number").val().trim(),
+      };
+
+      $.post("/api/reservations", newReservation)
+        .then(function(data) {
+          console.log("reservationform.html", data);
+          alert("Submitting reservation request...");
+        });
+    });
+  </script>
+
+</body>
+</html>
