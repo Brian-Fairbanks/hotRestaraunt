@@ -39,7 +39,7 @@ app.get('/reservationform', function(req, res){
 
 //viewReservation route
 app.get('/api/reservation', function(req, res){
-    return res.json(reservations);
+    return res.json({'reservations': reservations, 'waitlist': waitlist});
 });
 
 
@@ -48,9 +48,15 @@ app.post("/api/reservation", function(req, res){
     var reservation = req.body;
 
     console.log(reservation);
-    reservations.push(reservation);
 
-    res.send("Thank you, you are now reserved");
+    if (reservations.length <5){
+        reservations.push(reservation);
+        res.send("Thank you, you are now reserved");
+    }
+    else{
+        waitlist.push(reservation);
+        res.send("sorry, you have been put on the waitlist.");
+    }
 })
 
 /* #  Main code
